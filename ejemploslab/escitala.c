@@ -12,7 +12,7 @@ int main() {
         printf("1) Crear mensaje cifrado.\n");
         printf("2) Descifrar mensaje.\n");
         printf("3) Salir.\n");
-        scanf("%d, &opcion);
+        scanf("%hu", &opcion);
         switch(opcion){
             case 1:
                 crearMensaje();
