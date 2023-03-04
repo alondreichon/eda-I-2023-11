@@ -1,34 +1,18 @@
-#include <stdio.h>
+#include<stdio.h>
 
-/* Programa para ilustrar los movimientos permitidos para las piezas de ajedrez alifl y torre*/
 void moverAlfil();
 void moverTorre();
 
 int columnas[8];
 int filas[8];
-
+int x, y;			// x columna, y fila .
+  int a, b, c, d, e, f, g;
+  
  
 int main(){
-  char tablero[8][8];
+char tablero[8][8];
 short opcion = 0;
- int x, y;			// x columna, y fila .
-  int a, b, c, d, e, f, g;
-  //TORRE
-    if ((x == 0 && y == 0) ||
-		(x == 7 && y == 0) ||
-		(x == 0 && y == 7) || (x == 7 && y == 7))
-	    {
-	      printf ("T");
-	    }
-      //ALFIL
-	  else
-	    if ((x == 0 && y == 2) ||
-		(x == 7 && y == 2) ||
-		(x == 0 && y == 5) || (x == 7 && y == 5))
-	    {
-	      printf ("A");
-	    } 
-  
+ 
 while (1){
       
 printf ("\n\t*** Ajedrez ***\n");
@@ -58,7 +42,6 @@ switch (opcion){
 	default:
 	  printf ("Opcion no valida.\n");
 	
-
         }
  
     }
@@ -79,6 +62,17 @@ void moverAlfil(){
     for (i=0 ; i<col ; i++)
     for (j=0 ; j<fil ; j++)
     tablero[i][j] = posiciones[k++];
+    printf("Los movimientos del Alfil seran: \n");
+    for (i=0 ; i<col ; i++)
+    for (j=0 ; j<fil ; j++)
+   
+    //ALFIL
+	    if ((x == 0 && y == 2) ||
+		(x == 7 && y == 2) ||
+		(x == 0 && y == 5) || (x == 7 && y == 5))
+	    {
+	      printf ("A");
+	    } 
 
 }
 
@@ -99,10 +93,13 @@ void moverTorre(){
 printf("Los movimientos de la Torre seran: \n");
 for (i=0 ; i<col ; i++)
  for (j=0 ; j<fil ; j++)
- printf("%c", tablero[j][i]);
- printf("\n");
-    if (i==col && j==fil){
-        tablero[i][j]="T";
+
+    if ((x == 0 && y == 0) ||
+		(x == 7 && y == 0) ||
+		(x == 0 && y == 7) || (x == 7 && y == 7))
+	    {
+	      printf ("T");
+	    }
+      
     }
    
-}
