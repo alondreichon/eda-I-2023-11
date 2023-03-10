@@ -1,117 +1,176 @@
 #include <stdio.h>
-
-void moverReina();
-void moverRey();
-void moverReina1();
-void pintaTablero();
-void inicializarTablero();
-int col=0, fil=0;
-int x, y; // x columna, y fila.
-char tablero[8][8];
+#include <stdlib.h>
+void moverReina(char *tablero,int *Qx,int *Qy);
+void moverRey(char *tablero, int *Kx, int *Ky);
 
 int main(){
+    int x=0, y=0, i, j, x2, y2;
+    char tablero[8][8];
+    short opcion = 0;
 
 
-short opcion=0;
+    printf("Ingrese las coordenadas y,x para iniciar la Reina\n");
+    scanf("%i", &x);
+    scanf("%i", &y);
+    x--;
+    y--;
+ 
+    printf("Ingrese las coordenadas y,x para iniciar al Rey\n");
+    scanf("%i", &x2);
+    scanf("%i", &y2);
+    x2--;
+    y2--;
 
-    while(1){
+
+    while(opcion!=3){
+
+        for(i=0; i<8; i++){
+            for(j=0; j<8; j++){
+                if(i%2==0){
+                    if(j%2==0){
+                        tablero[i][j]=' ';
+                    }   
+                    else{
+                        tablero[i][j]='#';
+                    }
+                }
+                else{
+                    if(j%2==1){
+                        tablero[i][j]=' ';
+                    }   
+                    else{
+                        tablero[i][j]='#';
+                    }
+                }
+            }
+        } 
+        tablero[x][y] = 'Q';
+        tablero[x2][y2] = 'K';
+
         printf("\n\t***Ajedrez***\n");
+
+        for(i=0; i<8; i++){
+            for(j=0; j<8;j++){
+                printf("%c ",tablero[i][j]);
+            }  
+            printf("\n");
+        } 
+        printf("\n");
+        
         printf("¿Que desea realizar?\n");
         printf ("1) Mover Reina.\n");
-      
         printf ("2) Mover Rey.\n");
-      
         printf ("3) Salir.\n");
-      
-        scanf ("%hd", &opcion);
-    
-    inicializarTablero();
 
-    switch (opcion){
-	
-    case 1:
-    moverReina();
-    pintaTablero();
-    break;
-	
-    case 2:
-    moverRey();
-    pintaTablero();
-	  break;
-	
-    case 3:
-	    return 0;
-	default:
-	  printf ("Opcion no valida.\n");
-	
-        }
-    }
-    return 0;
-}
+        scanf ("%i", &opcion);
 
-void moverReina(){
-    printf("Ingrese las coordenadas:\n");
-      printf("Ingrese la coordenada en x:\n"); 
-      scanf("%i",&fil);
-        printf("Ingrese la coordenada en y:\n"); 
-        scanf("%i",&col);
-        tablero[col][fil]='Q';
-      
+        switch (opcion)
+        {
+        case 1:
+            moverReina(tablero[0],&x,&y);
+            break;
         
-}
-
-void moverRey(){
-     printf("Ingrese las coordenadas:\n");
-      printf("Ingrese la coordenada en x:\n"); 
-      scanf("%i",&fil);
-        printf("Ingrese la coordenada en y:\n"); 
-        scanf("%i",&col);
-        tablero[col][fil]='R';
-       
-       
-}
-
-void pintaTablero(){
-
-    for (int i=1 ; i<=8 ; i++){
-
-        for (int j=1 ; j<=8 ; j++){
-        printf("%c", tablero[i][j]);
+        case 2:
+            moverRey(tablero[0],&x2,&y2);
+            break;
+        case 3:
+            return 0;
+        default:
+            printf("Opcion no valida. \n");
         }
-            printf("\n");
+    
+    }
+
+}
+
+void moverReina(char *tablero, int *Qx, int *Qy){
+    int i, j, Qxprov=*Qx, Qyprov=*Qy, diagonal;
+    char tablero2[8][8];
+    for(i=0; i<8; i++){
+        for(j=0; j<8; j++){
+            tablero2[i][j]=*(tablero+(i*8)+j);
+        }
+    }
+    for(i=0; i<8; i++){
+        tablero2[*Qx][i]='*';
+    }
+    for(i=0; i<8; i++){
+        tablero2[i][*Qy]='*';
+    }
+    while(Qxprov != 0 && Qyprov !=0){
+        Qxprov--;
+        Qyprov--;
+    }
+    diagonal = *Qy-*Qx;
+    for(i=0; i<abs(diagonal-8); i++){
+       tablero2[Qxprov][Qyprov]='*';
+       Qxprov++;
+       Qyprov++;
+    }
+    Qxprov = *Qx;
+    Qyprov = *Qy;
+    while(Qxprov != 8 && Qyprov !=0){
+        Qxprov++;
+        Qyprov--;
+    }
+    for(i=0; i<8; i++){
+        if(Qxprov>=0 && Qyprov<=8){
+            tablero2[Qxprov][Qyprov]='*';
+        }
+        Qxprov--;
+        Qyprov++;
+    }
+    tablero2[*Qx][*Qy]='Q';
+    
+    printf("Los movimientos permitidos seran: \n");
+    for(i=0; i<8; i++){
+        for(j=0; j<8; j++){
+            printf("%c ", tablero2[i][j]);
+        }
+        printf("\n");
     }
     
+    
+
 }
 
-void inicializarTablero(){
-    for (int i=0 ; i<=8 ; i++)
-    for (int j=0 ; j<=8 ; j++)
-    tablero[i][j] = '-';
-}
-
-void moverReina1(){
- int col=8, fil=8, i, j, k=0;
-    printf("Ingrese las coordenadas:\n");
-      printf("Ingrese la coordenada en x:\n"); 
-      scanf("%i",&col);
-        printf("Ingrese la coordenada en y:\n"); 
-        scanf("%i",&fil);
-    char tablero[col][fil];
-    char posiciones[col*fil];
-       
-    for (i=0 ; i<col ; i++)
-    for (j=0 ; j<fil ; j++)
-    tablero[i][j] = posiciones[k++];
-printf("Los movimientos de la Reina seran: \n");
-
-
-  	if ((x==0 && y==3) || (x==7 && y==3))
-            {
-	      printf ("Q");
-	    }
-	    
-	    else{
-                printf(" *");
-            }
-
+void moverRey(char *tablero, int *Kx, int *Ky){
+    int j=1, kxprov = *Kx-1, kyprov = *Ky-1, i;
+    char tablero2[8][8];
+    for(i=0; i<8; i++){
+        for(j=0; j<8; j++){
+            tablero2[i][j]=*(tablero+(i*8)+j);
+        }
     }
+    for(i=0; i<2; i++){
+        if(kxprov>=0 && kyprov >=0 && kxprov<8 && kyprov<8){
+            tablero2[kxprov][kyprov]='*';
+        }
+        kyprov++;
+    }
+    for(i=0; i<2; i++){
+         if(kxprov>=0 && kyprov >=0 && kxprov<8 && kyprov<8){
+            tablero2[kxprov][kyprov]='*';
+        }
+        kxprov++;
+    }
+    for(i=0; i<3; i++){
+         if(kxprov>=0 && kyprov >=0 && kxprov<8 && kyprov<8){
+            tablero2[kxprov][kyprov]='*';
+        }
+        kyprov--;
+    }
+    if(kxprov>=0 && kyprov >=0 && kxprov<8 && kyprov<8){
+        tablero2[kxprov-1][kyprov+1]='*';
+    }
+    tablero2[*Kx][*Ky]='K';
+    printf("Los movimientos permitidos seran:\n");
+    for(i=0; i<8; i++){
+        for(j=0; j<8; j++){
+            printf("%c ", tablero2[i][j]);
+        }
+        printf("\n");
+    }
+    
+
+}
