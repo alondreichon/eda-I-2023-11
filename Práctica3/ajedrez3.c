@@ -88,8 +88,6 @@ struct caballo{
     int y; 
 };
 
-
-
 void movimientosCaballo(struct caballo c, char tablero[8][8]){
     int i, j, x, y;
     int dx[]= {2, 2, -2, -2, 1, 1, -1, -1};
@@ -130,7 +128,6 @@ void moverCaballo(){
             }
         }
     }
-
 
     printf("Ingrese las coordenadas del Caballo: \n");
    
@@ -245,7 +242,6 @@ void movimientosTorre(struct torre t,char tablero[8][8]){
         }
     }
 
- 
     for (i = 0; i < 8; i++) {
         x = i;
         y = t.y;
