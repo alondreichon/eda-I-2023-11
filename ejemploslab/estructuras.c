@@ -45,7 +45,7 @@ void llenarArreglo(struct pelicula arreglo [TAM]){
         }
         arreglo[iesimo] = movie;
  }
-}./
+}
 
 void imprimirArreglo(struct pelicula arreglo [TAM]){
     int iesimo, enesimo;
