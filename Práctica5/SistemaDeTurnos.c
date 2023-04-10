@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 struct Pila {
     int top;
@@ -99,15 +100,23 @@ int dequeue(struct Cola* cola)
     }
 }
 
-void formarse(struct Pila* pila,struct Cola* cola)
+void formarse(struct Pila* pila,struct Cola* cola, int* ultimo_formado )
 {
     int turno = pop(pila);
     if (turno != -1) {
         enqueue(cola, turno);
         printf("El elemento se encuentra formado en la cola con el turno %d.\n", turno);
+        *ultimo_formado = turno;
     } else {
         printf("Ya no hay turnos disponibles...\n");
     }
+}
+
+int peek(struct Pila* pila)
+{
+	if (isEmpty(pila))
+		return INT_MIN;
+	return pila->arreglo[pila->top];
 }
 
 int main(){
@@ -116,7 +125,9 @@ int main(){
     for (int i = 10; i >= 1; i--) {
         push(pila, i);
     }
+    
     struct Cola* cola = createQueue(10);
+    int ultimo_formado = -1; 
     
     while (1){
         printf ("\n\t*** Sistema de Turnos ***\n");
@@ -132,10 +143,12 @@ int main(){
         switch (opcion){
 	
     case 1:
-    formarse(pila, cola);
+    formarse(pila, cola, &ultimo_formado);
     break;
 	
     case 2:
+    printf("El ultimo elemento en el tope de la pila es: %d\n", peek(pila));
+    printf("El ultimo elemento formado en la cola es %d.\n", ultimo_formado);
 	  return 0;
 	default:
 	  printf ("Opcion no valida.\n");
@@ -143,5 +156,7 @@ int main(){
         }
  
     }
+    
+ 
 
 }
