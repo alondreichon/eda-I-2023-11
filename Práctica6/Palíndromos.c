@@ -35,7 +35,6 @@ int isEmpty(struct Dequeue* deq) {
     return 0;
 }
 
-
 void insertFront(struct Dequeue* deq, char palabra1) {
     if(isFull(deq)) {
         printf("Cola doble llena\n");
@@ -120,9 +119,9 @@ int palindromo(char* str) {
         }
     }
     while(deq->front != deq->rear && deq->front != deq->rear + 1) {
-        char first = deleteFront(deq);
-        char last = deleteRear(deq);
-        if(first != last) {
+        char primero = deleteFront(deq);
+        char ultimo = deleteRear(deq);
+        if(primero != ultimo) {
             return 0;
         }
     }
