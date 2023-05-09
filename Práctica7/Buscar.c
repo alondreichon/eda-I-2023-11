@@ -196,5 +196,8 @@ int main() {
 
   buscar(last, valor);
 
+  printf("\nMostrando estructura:\n");
+    traverse(last);
+    printf("\n");
   return 0;
 }
