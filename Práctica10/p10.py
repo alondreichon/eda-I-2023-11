@@ -31,7 +31,7 @@ def insertarLibro():
         libros.append(libro)
 
 def eliminarLibro():
-    global libros  # Acceder a la variable libros global
+    global libros
     
     titulo = input("¿Qué libro desea eliminar?\n")
     encontrado = False
