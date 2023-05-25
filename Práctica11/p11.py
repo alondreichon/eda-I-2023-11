@@ -10,9 +10,9 @@ def menu(intOption):
         else:
             print("Serie de Fibonacci (en orden inverso):\n")
             fibo_list = []
-            for i in range(nterms-1, -1, -1):  # Generar valores en orden inverso
+            for i in range(nterms-1, -1, -1):
                 fibo_list.append(recur_fibo(i))
-            print(*fibo_list)  # Imprimir la lista sin corchetes ni comas
+            print(*fibo_list)
     elif intOption == 3:
         sys.exit()
     else:
