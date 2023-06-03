@@ -16,7 +16,7 @@ def insertionSort(n_lista):
         n_lista[posicion] = actual
     return n_lista
 
-def partition(arr, low, high):
+def partir(arr, low, high):
     i = low - 1
     pivot = arr[high]
 
@@ -30,7 +30,7 @@ def partition(arr, low, high):
 
 def quickSort(arr, low, high):
     if low < high:
-        pi = partition(arr, low, high)
+        pi = partir(arr, low, high)
 
         quickSort(arr, low, pi - 1)
         quickSort(arr, pi + 1, high)
